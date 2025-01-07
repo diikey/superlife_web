@@ -2,23 +2,27 @@ import {
   FacebookOutlined,
   Instagram,
   LinkedIn,
+  Menu,
   Twitter,
 } from "@mui/icons-material";
 import {
   AppBar,
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   IconButton,
   Paper,
   styled,
   TextField,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
+import { useRef } from "react";
+
+import appbarlogo from "../../assets/appbar-logo.png";
+import appbarlogosmall from "../../assets/appbar-logo-small.png";
+import stc30 from "../../assets/stc30.png";
 
 const GradientImage = styled("div")(({ theme, image }) => ({
   position: "relative",
@@ -36,11 +40,38 @@ const GradientImage = styled("div")(({ theme, image }) => ({
     width: "100%",
     height: "100%",
     background:
-      "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%)",
+      "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)",
   },
 }));
 
+const styles = {
+  productBox: {
+    position: "relative",
+    height: "50vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#edfdf8",
+    py: { xs: 5, md: 0 },
+  },
+  productInsideBox: {
+    zIndex: 1,
+    color: "black",
+    justifyItems: "center",
+  },
+};
+
 const App = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const sectionRefs = {
+    products: useRef(null),
+    testimonies: useRef(null),
+    contactUs: useRef(null),
+  };
+
   const testimonies = [
     {
       quote: "This product changed my life! Highly recommend to everyone.",
@@ -56,17 +87,60 @@ const App = () => {
     },
   ];
 
+  const goToSection = (section) => {
+    sectionRefs[section].current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Box>
       {/* App Bar */}
-      <AppBar position="sticky">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MyLogo
-          </Typography>
-          <Button color="inherit">Products</Button>
-          <Button color="inherit">Testimonies</Button>
-          <Button color="inherit">Contact Us</Button>
+      <AppBar position="static">
+        <Toolbar sx={{ backgroundColor: "white" }}>
+          <Box component={"div"} sx={{ flexGrow: 1 }}>
+            <img
+              src={isSmallScreen ? appbarlogosmall : appbarlogo}
+              alt="appbarlogo"
+              style={{
+                width: isSmallScreen ? "100px" : "300px",
+                height: "auto",
+              }}
+            />
+          </Box>
+          {isSmallScreen ? (
+            <IconButton size="large" edge="start" aria-label="menu">
+              <Menu />
+            </IconButton>
+          ) : (
+            <>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  goToSection("products");
+                }}
+                sx={{ color: "black", fontWeight: "bold" }}
+              >
+                Products
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  goToSection("testimonies");
+                }}
+                sx={{ color: "black", fontWeight: "bold" }}
+              >
+                Testimonies
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  goToSection("contactUs");
+                }}
+                sx={{ color: "black", fontWeight: "bold" }}
+              >
+                Contact Us
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -93,8 +167,9 @@ const App = () => {
             color: "black",
           }}
         >
+          <Typography variant="body1">Welcome to</Typography>
           <Typography variant="h2" gutterBottom>
-            Welcome to Our Website
+            Superlife Wellness Trading Qatar
           </Typography>
           <Typography variant="body1">
             Explore our products, read customer testimonials, and contact us for
@@ -104,79 +179,61 @@ const App = () => {
       </Box>
 
       {/* Products Section */}
-      <Typography variant="h4" gutterBottom sx={{ p: 4 }}>
-        Products
-      </Typography>
       <Box
+        ref={sectionRefs.products}
         sx={{
           display: "flex",
-          justifyContent: "space-around",
           alignItems: "center",
-          px: 2,
           flexDirection: { xs: "column", md: "row" },
         }}
       >
         {/* Product 1 */}
-        <Card sx={{ maxWidth: 345, mb: { xs: 2, md: 0 } }}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="https://via.placeholder.com/300x200"
-            alt="Product 1"
+        <Box sx={styles.productBox}>
+          <img
+            src={stc30}
+            alt="product1"
+            style={{ width: "100%", height: "70%", objectFit: "contain" }}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Product 1
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              This is a description of Product 1. It has amazing features and
-              benefits for you to enjoy.
-            </Typography>
-          </CardContent>
-          <CardActions>
+          <Box sx={styles.productInsideBox}>
+            <Typography variant="h6">STC30 - Superlife Total Care</Typography>
             <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              sx={{ ml: "auto" }}
+              onClick={() => {}}
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                backgroundColor: "#008053",
+              }}
             >
-              Order Now
+              View Product
             </Button>
-          </CardActions>
-        </Card>
+          </Box>
+        </Box>
 
         {/* Product 2 */}
-        <Card sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="https://via.placeholder.com/300x200"
-            alt="Product 2"
+        <Box sx={[styles.productBox, { backgroundColor: "#fff4f0" }]}>
+          <img
+            src={stc30}
+            alt="product1"
+            style={{ width: "100%", height: "70%", objectFit: "contain" }}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Product 2
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              This is a description of Product 2. Discover how it can improve
-              your life today.
-            </Typography>
-          </CardContent>
-          <CardActions>
+          <Box sx={styles.productInsideBox}>
+            <Typography variant="h6">STC30 - Superlife Total Care</Typography>
             <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              sx={{ ml: "auto" }}
+              onClick={() => {}}
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                backgroundColor: "#c52c29",
+              }}
             >
-              Order Now
+              View Product
             </Button>
-          </CardActions>
-        </Card>
+          </Box>
+        </Box>
       </Box>
 
       {/* Testimonies Section */}
-      <Box sx={{ p: 4 }}>
+      <Box ref={sectionRefs.testimonies} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
           Customer Testimonies
         </Typography>
@@ -195,7 +252,7 @@ const App = () => {
       </Box>
 
       {/* Contact Us Section */}
-      <Box sx={{ p: 4 }}>
+      <Box ref={sectionRefs.contactUs} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
           Contact Us
         </Typography>
