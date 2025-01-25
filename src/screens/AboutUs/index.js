@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -21,6 +21,10 @@ const AboutUsScreen = () => {
     email: "",
     message: "",
   });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
