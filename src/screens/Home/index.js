@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useRef } from "react";
+import ReactPlayer from "react-player";
 
 import stc30 from "../../assets/stc30.png";
 import superRoot from "../../assets/super-root.png";
@@ -17,8 +18,6 @@ import superRootPresentation from "../../assets/super-root-product-presentation.
 import { useLocation, useNavigate } from "react-router";
 import { RouteName } from "../App/utils/general_utils";
 import welcomeImg from "../../assets/welcome-img.jpeg";
-import openingVid from "../../assets/videos/superlife-welness-trading.mp4";
-import ReactPlayer from "react-player";
 
 const GradientImage = styled("div")(({ theme, image }) => ({
   position: "relative",
@@ -262,7 +261,7 @@ const HomeScreen = () => {
       {/* ABOUT US SECTION */}
       <ReactPlayer
         ref={sectionRefs.aboutUs}
-        url={openingVid}
+        url="https://www.youtube.com/watch?v=bVycnOnWspI"
         controls
         config={{
           file: {

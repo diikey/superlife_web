@@ -1,9 +1,9 @@
 import {
   FacebookOutlined,
   Instagram,
-  LinkedIn,
+  // LinkedIn,
   Menu as MenuIcon,
-  Twitter,
+  // Twitter,
 } from "@mui/icons-material";
 import {
   AppBar,
