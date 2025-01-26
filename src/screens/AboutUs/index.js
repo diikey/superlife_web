@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
-  TextField,
-  Button,
   Grid2,
   Card,
   CardMedia,
@@ -14,28 +12,12 @@ import CEO1 from "../../assets/members/lai-tek-kean.jpg"; // Replace with your i
 import CEO2 from "../../assets/members/paul-nair.jpg";
 import Member1 from "../../assets/members/dennis.jpg";
 import Member2 from "../../assets/members/vhanch.jpg";
+import ContactUs from "./components/ContactUs";
 
 const AboutUsScreen = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
-  };
 
   return (
     <Box>
@@ -176,50 +158,7 @@ const AboutUsScreen = () => {
       </Box>
 
       {/* Section 3: Contact Us */}
-      <Box sx={{ p: 4, textAlign: "center", backgroundColor: "#f8f9fa" }}>
-        <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold" }}>
-          Contact Us
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{ maxWidth: "600px", mx: "auto", textAlign: "left" }}
-        >
-          <TextField
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            fullWidth
-            sx={{ mb: 2 }}
-            required
-          />
-          <TextField
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            fullWidth
-            sx={{ mb: 2 }}
-            required
-          />
-          <TextField
-            label="Message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            fullWidth
-            multiline
-            rows={4}
-            sx={{ mb: 2 }}
-            required
-          />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Send Message
-          </Button>
-        </Box>
-      </Box>
+      <ContactUs />
     </Box>
   );
 };

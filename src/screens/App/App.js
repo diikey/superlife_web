@@ -4,6 +4,8 @@ import {
   // LinkedIn,
   Menu as MenuIcon,
   // Twitter,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -17,13 +19,13 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { NavLink, Route, Routes, useNavigate } from "react-router";
 
 import appbarlogo from "../../assets/appbar-logo.png";
 import appbarlogosmall from "../../assets/appbar-logo-small.png";
 import HomeScreen from "../Home";
 import ProductScreen from "../Products";
-import { NavLink, Route, Routes, useNavigate } from "react-router";
 import { RouteName } from "./utils/general_utils";
 import AboutUsScreen from "../AboutUs";
 
@@ -37,14 +39,20 @@ const App = () => {
     aboutUs: "aboutUs",
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [communityAnchorEl, setCommunityAnchorEl] = useState(null);
+  const communityMenuOpen = Boolean(communityAnchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = (section) => {
     setAnchorEl(null);
-    navigate(RouteName.HomeScreen, { state: { scrollTo: section } }); // Navigate to HomePage and pass the section name
+    if (typeof section == "string") {
+      navigate(RouteName.HomeScreen, { state: { scrollTo: section } }); // Navigate to HomePage and pass the section name
+    }
   };
 
   return (
@@ -99,12 +107,41 @@ const App = () => {
                   Products
                 </MenuItem>
                 <MenuItem
-                  onClick={() => {
-                    handleClose(sectionRefs.testimonies);
-                  }}
+                  onClick={(event) =>
+                    setCommunityAnchorEl(
+                      communityMenuOpen ? null : event.currentTarget
+                    )
+                  }
                 >
-                  Testimonies
+                  Community{" "}
+                  {communityMenuOpen ? (
+                    <KeyboardArrowUp />
+                  ) : (
+                    <KeyboardArrowDown />
+                  )}
                 </MenuItem>
+                {communityMenuOpen && (
+                  <>
+                    <MenuItem
+                      sx={{ pl: 4 }}
+                      onClick={() => {
+                        setCommunityAnchorEl(null);
+                        handleClose(sectionRefs.members);
+                      }}
+                    >
+                      Members
+                    </MenuItem>
+                    <MenuItem
+                      sx={{ pl: 4 }}
+                      onClick={() => {
+                        setCommunityAnchorEl(null);
+                        handleClose(sectionRefs.testimonies);
+                      }}
+                    >
+                      Testimonies
+                    </MenuItem>
+                  </>
+                )}
                 <MenuItem
                   onClick={() => {
                     handleClose(sectionRefs.aboutUs);
@@ -126,14 +163,51 @@ const App = () => {
                 Products
               </Button>
               <Button
-                color="inherit"
-                onClick={() => {
-                  handleClose(sectionRefs.testimonies);
-                }}
+                id="community-menu-button"
+                aria-controls={communityMenuOpen ? "community-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={communityMenuOpen ? "true" : undefined}
+                onClick={(event) => setCommunityAnchorEl(event.currentTarget)}
                 sx={{ color: "black", fontWeight: "bold" }}
               >
-                Testimonies
+                Community{" "}
+                {communityMenuOpen ? (
+                  <KeyboardArrowUp />
+                ) : (
+                  <KeyboardArrowDown />
+                )}
               </Button>
+              <Menu
+                id="community-menu"
+                anchorEl={communityAnchorEl}
+                open={communityMenuOpen}
+                onClose={() => setCommunityAnchorEl(null)}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    setCommunityAnchorEl(null);
+                    // handleClose(sectionRefs.members);
+                  }}
+                >
+                  Members
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setCommunityAnchorEl(null);
+                    handleClose(sectionRefs.testimonies);
+                  }}
+                >
+                  Testimonies
+                </MenuItem>
+              </Menu>
               <Button
                 color="inherit"
                 onClick={() => {
@@ -148,6 +222,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
 
+      {/* Routes */}
       <Routes>
         <Route index element={<HomeScreen />} />
         <Route path={RouteName.ProductScreen} element={<ProductScreen />} />

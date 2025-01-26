@@ -259,26 +259,27 @@ const HomeScreen = () => {
       </Box>
 
       {/* ABOUT US SECTION */}
-      <ReactPlayer
-        ref={sectionRefs.aboutUs}
-        url="https://www.youtube.com/watch?v=bVycnOnWspI"
-        controls
-        config={{
-          file: {
-            attributes: {
-              onContextMenu: (e) => e.preventDefault(),
-              controlsList: "nodownload",
+      <Box ref={sectionRefs.aboutUs}>
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=mqNidWBMWiA"
+          controls
+          config={{
+            file: {
+              attributes: {
+                onContextMenu: (e) => e.preventDefault(),
+                controlsList: "nodownload",
+              },
             },
-          },
-        }}
-        width="80%"
-        style={{
-          borderRadius: "8px",
-          overflow: "hidden",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          justifySelf: "center",
-        }}
-      />
+          }}
+          width="80%"
+          style={{
+            borderRadius: "8px",
+            overflow: "hidden",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            justifySelf: "center",
+          }}
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
