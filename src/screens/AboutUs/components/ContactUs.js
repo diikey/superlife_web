@@ -13,11 +13,12 @@ const ContactUs = () => {
     from_name: "",
     from_email: "",
     message: "",
+    from_contact: "",
     to_name: "info.superlifeqatar@gmail.com",
   });
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [messageLen, setMessageLen] = useState(0);
+  // const [messageLen, setMessageLen] = useState(0);
 
   useEffect(() => {
     if (status !== "") {
@@ -34,11 +35,14 @@ const ContactUs = () => {
   }, [isLoading]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (name === "message") {
-      setMessageLen(value.length);
+    let { name, value } = e.target;
+    if (name === "from_contact" && value.length >= 9) {
+      value = value.substring(0, 8);
     }
+    setFormData({ ...formData, [name]: value });
+    // if (name === "message") {
+    //   setMessageLen(value.length);
+    // }
   };
 
   const handleSubmit = (e) => {
@@ -57,7 +61,12 @@ const ContactUs = () => {
       .then(
         (response) => {
           setStatus("Message sent successfully!");
-          setFormData({ from_name: "", from_email: "", message: "" });
+          setFormData({
+            from_name: "",
+            from_email: "",
+            message: "",
+            from_contact: "",
+          });
           console.log("SUCCESS!", response.status, response.text);
         },
         (err) => {
@@ -96,6 +105,25 @@ const ContactUs = () => {
           sx={{ mb: 2 }}
           required
         />
+        <Box
+          sx={{
+            mb: 2,
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ mr: 1 }}>+974</Typography>
+          <TextField
+            label="Contact No."
+            name="from_contact"
+            type="number"
+            value={formData.from_contact}
+            onChange={handleChange}
+            fullWidth
+            required
+          />
+        </Box>
         <TextField
           label="Message"
           name="message"
@@ -104,12 +132,13 @@ const ContactUs = () => {
           fullWidth
           multiline
           rows={4}
+          sx={{ mb: 2 }}
           required
-          slotProps={{ htmlInput: { maxLength: 255 } }}
+          // slotProps={{ htmlInput: { maxLength: 255 } }}
         />
-        <Typography variant="body2" sx={{ justifySelf: "end", mb: 2 }}>
+        {/* <Typography variant="body2" sx={{ justifySelf: "end", mb: 2 }}>
           {messageLen + " / 255"}
-        </Typography>
+        </Typography> */}
         <Button
           type="submit"
           variant="contained"
