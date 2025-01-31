@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router";
 
-import stcVideo from "../../assets/videos/stem-cells.mp4";
+// import stcVideo from "../../assets/videos/stem-cells.mp4";
 import ReactPlayer from "react-player";
 
 const ProductScreen = () => {
@@ -24,9 +24,9 @@ const ProductScreen = () => {
     >
       {isStc && (
         <ReactPlayer
-          url={stcVideo}
+          url="https://youtube.com/shorts/HHhFr_xKPYM"
           controls
-          playing
+          // playing
           config={{
             file: {
               attributes: {
@@ -35,7 +35,7 @@ const ProductScreen = () => {
               },
             },
           }}
-          width="80%"
+          width="60%"
           style={{
             borderRadius: "8px",
             overflow: "hidden",

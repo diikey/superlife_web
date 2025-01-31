@@ -4,8 +4,8 @@ import {
   // LinkedIn,
   Menu as MenuIcon,
   // Twitter,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
+  // KeyboardArrowDown,
+  // KeyboardArrowUp,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -41,8 +41,8 @@ const App = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [communityAnchorEl, setCommunityAnchorEl] = useState(null);
-  const communityMenuOpen = Boolean(communityAnchorEl);
+  // const [communityAnchorEl, setCommunityAnchorEl] = useState(null);
+  // const communityMenuOpen = Boolean(communityAnchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -106,7 +106,7 @@ const App = () => {
                 >
                   Products
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                   onClick={(event) =>
                     setCommunityAnchorEl(
                       communityMenuOpen ? null : event.currentTarget
@@ -141,7 +141,7 @@ const App = () => {
                       Testimonies
                     </MenuItem>
                   </>
-                )}
+                )} */}
                 <MenuItem
                   onClick={() => {
                     handleClose(sectionRefs.aboutUs);
@@ -162,7 +162,7 @@ const App = () => {
               >
                 Products
               </Button>
-              <Button
+              {/* <Button
                 id="community-menu-button"
                 aria-controls={communityMenuOpen ? "community-menu" : undefined}
                 aria-haspopup="true"
@@ -207,7 +207,7 @@ const App = () => {
                 >
                   Testimonies
                 </MenuItem>
-              </Menu>
+              </Menu> */}
               <Button
                 color="inherit"
                 onClick={() => {

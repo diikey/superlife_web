@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Paper,
+  // Paper,
   styled,
   Typography,
   useMediaQuery,
@@ -69,20 +69,20 @@ const HomeScreen = () => {
     aboutUs: useRef(null),
   };
   const location = useLocation();
-  const testimonies = [
-    {
-      quote: "This product changed my life! Highly recommend to everyone.",
-      author: "John Doe",
-    },
-    {
-      quote: "Excellent quality and amazing customer service.",
-      author: "Jane Smith",
-    },
-    {
-      quote: "Best purchase I've ever made. 5 stars!",
-      author: "Alice Johnson",
-    },
-  ];
+  // const testimonies = [
+  //   {
+  //     quote: "This product changed my life! Highly recommend to everyone.",
+  //     author: "John Doe",
+  //   },
+  //   {
+  //     quote: "Excellent quality and amazing customer service.",
+  //     author: "Jane Smith",
+  //   },
+  //   {
+  //     quote: "Best purchase I've ever made. 5 stars!",
+  //     author: "Alice Johnson",
+  //   },
+  // ];
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -141,6 +141,7 @@ const HomeScreen = () => {
           display: "flex",
           alignItems: "center",
           flexDirection: { xs: "column", md: "row" },
+          mb: 2,
         }}
       >
         {/* Product 1 */}
@@ -234,7 +235,7 @@ const HomeScreen = () => {
       </Box>
 
       {/* Testimonies Section */}
-      <Box ref={sectionRefs.testimonies} sx={{ p: 4 }}>
+      {/* <Box ref={sectionRefs.testimonies} sx={{ p: 4 }}>
         <Typography
           variant="h4"
           gutterBottom
@@ -243,9 +244,9 @@ const HomeScreen = () => {
           fontWeight={700}
         >
           Customer Testimonials
-        </Typography>
-        {/* <Carousel> */}
-        {testimonies.map((testimony, index) => (
+        </Typography> */}
+      {/* <Carousel> */}
+      {/* {testimonies.map((testimony, index) => (
           <Paper key={index} sx={{ p: 4, textAlign: "center" }}>
             <Typography variant="h6" gutterBottom>
               "{testimony.quote}"
@@ -254,9 +255,8 @@ const HomeScreen = () => {
               - {testimony.author}
             </Typography>
           </Paper>
-        ))}
-        {/* </Carousel> */}
-      </Box>
+        ))} */}
+      {/* </Box> */}
 
       {/* ABOUT US SECTION */}
       <Box ref={sectionRefs.aboutUs}>
